@@ -10,3 +10,5 @@ server/.env
 *.env.local
 client/.env.local
 server/.env.local
+.plan
+.plan/
