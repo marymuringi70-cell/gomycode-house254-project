@@ -7,15 +7,8 @@ import Browse from './pages/Browse'
 import PropertyDetail from './pages/PropertyDetail'
 import Dashboard from './pages/Dashboard'
 import AddProperty from './pages/AddProperty'
-
-function AuthPlaceholder({ title }: { title: string }) {
-  return (
-    <main className="mx-auto max-w-3xl px-4 py-16 text-center">
-      <h1 className="text-3xl font-bold text-brand-charcoal">{title}</h1>
-      <p className="mt-3 text-brand-charcoal/70">Authentication flows will connect to the backend phase.</p>
-    </main>
-  )
-}
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 export default function App() {
   return (
@@ -28,8 +21,8 @@ export default function App() {
           <Route path="/property/:id" element={<PropertyDetail />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add-property" element={<AddProperty />} />
-          <Route path="/login" element={<AuthPlaceholder title="Login" />} />
-          <Route path="/register" element={<AuthPlaceholder title="Register" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />
@@ -37,3 +30,4 @@ export default function App() {
     </BrowserRouter>
   )
 }
+
