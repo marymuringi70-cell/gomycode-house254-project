@@ -4,6 +4,7 @@ import { config } from 'dotenv'
 import { connectDb } from './config/db.js'
 import { authRouter } from './routes/authRoutes.js'
 import { propertyRouter } from './routes/propertyRoutes.js'
+import { errorHandler, notFoundHandler } from './middleware/errorHandler.js'
 
 config()
 
@@ -25,16 +26,8 @@ app.get('/', (_req, res) => {
 app.use('/api/auth', authRouter)
 app.use('/api/properties', propertyRouter)
 
-app.use((_req, res) => {
-  res.status(404).json({ message: 'Route not found' })
-})
-
-app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
-  const message = error instanceof Error ? error.message : 'Internal server error'
-  const statusCode = typeof (error as { statusCode?: number })?.statusCode === 'number' ? (error as { statusCode: number }).statusCode : 500
-
-  res.status(statusCode).json({ message })
-})
+app.use(notFoundHandler)
+app.use(errorHandler)
 
 async function bootstrap() {
   await connectDb()
