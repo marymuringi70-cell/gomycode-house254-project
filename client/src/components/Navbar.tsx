@@ -1,11 +1,14 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Building2, Menu, LogOut, LayoutDashboard, UserPlus, LogIn } from 'lucide-react'
+import { isTokenValid } from '../utils/auth'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   `rounded-full px-4 py-2 text-sm font-medium transition ${isActive ? 'bg-brand-sage text-brand-emerald' : 'text-brand-offwhite/90 hover:bg-white/10 hover:text-white'}`
 
 export default function Navbar() {
-  const isAuthenticated = Boolean(localStorage.getItem('authToken'))
+  const isAuthenticated = isTokenValid(localStorage.getItem('authToken'))
+
+
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-brand-emerald/95 text-brand-offwhite backdrop-blur">

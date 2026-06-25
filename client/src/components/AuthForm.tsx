@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { ShieldCheck, Mail, Lock, User, Phone, BadgeInfo } from 'lucide-react'
 import { login, register, type AuthUser } from '../services/api'
+import { isTokenValid } from '../utils/auth'
 
 type AuthMode = 'login' | 'register'
 
@@ -16,7 +17,9 @@ const roleOptions: Array<{ value: AuthUser['role']; label: string }> = [
 
 export default function AuthForm({ mode }: AuthFormProps) {
   const navigate = useNavigate()
-  const isLoggedIn = Boolean(localStorage.getItem('authToken'))
+
+  const isLoggedIn = isTokenValid(localStorage.getItem('authToken'))
+
 
   const [formData, setFormData] = useState({
     name: '',
