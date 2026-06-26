@@ -58,3 +58,10 @@ export const getPropertyById = async (id: string) => {
   return response.data
 }
 
+export const createProperty = async (payload: FormData) => {
+  const response = await api.post('/properties', payload, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+  return response.data
+}
+
