@@ -19,6 +19,24 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+import type { AuthResponse } from '../types/user.js'
+
+export const login = async (email: string, password: string): Promise<AuthResponse> => {
+  const response = await api.post('/auth/login', { email, password })
+  return response.data
+}
+
+export const register = async (payload: {
+  name: string
+  email: string
+  password: string
+  role?: string
+  phoneNumber?: string
+}): Promise<AuthResponse> => {
+  const response = await api.post('/auth/register', payload)
+  return response.data
+}
+
 export const getProperties = async (params?: Record<string, string>) => {
   const response = await api.get('/properties', { params })
   return response.data
